@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://intelligence-family.github.io/federation/agent-authorization.schema.json",
+  "title": "Intelligence Family Agent Authorization",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["provider", "agent", "purpose", "risk_tier", "scope", "approval", "status"],
+  "properties": {
+    "provider": {"type": "string", "minLength": 1},
+    "agent": {"type": "string", "minLength": 1},
+    "purpose": {"type": "string", "minLength": 1},
+    "risk_tier": {"type": "integer", "minimum": 0, "maximum": 3},
+    "scope": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+    "approval": {"type": "string", "enum": ["pre-authorized", "human-review", "explicit-human-approval"]},
+    "credential_owner": {"type": "string"},
+    "expires_at": {"type": ["string", "null"], "format": "date-time"},
+    "audit_source": {"type": "string"},
+    "revocation_procedure": {"type": "string"},
+    "status": {"type": "string", "enum": ["review", "approved", "suspended", "revoked"]}
+  }
+}

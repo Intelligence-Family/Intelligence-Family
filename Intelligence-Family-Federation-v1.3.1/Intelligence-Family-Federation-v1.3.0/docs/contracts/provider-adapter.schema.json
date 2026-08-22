@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://intelligence-family.github.io/schemas/provider-adapter.schema.json",
+  "title": "Intelligence Family Provider Adapter Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "display_name", "provider", "version", "capabilities", "provenance"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "display_name": {"type": "string", "minLength": 1},
+    "provider": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "capabilities": {"type": "array", "items": {"type": "string"}},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "license_status"],
+      "properties": {
+        "source": {"type": "string", "minLength": 1},
+        "license_status": {"type": "string", "minLength": 1},
+        "attribution": {"type": "string"}
+      }
+    },
+    "risk_class": {"type": "string", "enum": ["informational", "assistive", "consequential"]},
+    "human_approval_required": {"type": "boolean"}
+  }
+}
